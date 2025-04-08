@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Responsive Meta Tags -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    <!-- Title -->
+    <title>Space Exploration Info</title>
+
+    <!-- Meta Tags for PWA -->
+    <meta name="apple-mobile-web-app-status-bar" content="#001f3f" />
+    <meta name="theme-color" content="#001f3f" />
+
+    <!-- Link to Manifest -->
+    <link rel="manifest" href="manifest.json" />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+
+    <!-- Basic Styling -->
+    <style>
+      body {
+        margin: 0;
+        font-family: 'Roboto', sans-serif;
+        background-color: #f4f4f4;
+        color: #333;
+      }
+
+      header {
+        background-color: #001f3f;
+        padding: 20px;
+        text-align: center;
+        color: #fff;
+      }
+
+      main {
+        padding: 20px;
+      }
+
+      .card {
+        background-color: #fff;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        transition: transform 0.2s;
+      }
+
+      .card:hover {
+        transform: scale(1.02);
+      }
+
+      .card h2 {
+        margin-top: 0;
+        color: #001f3f;
+      }
+
+      @media (max-width: 600px) {
+        .card {
+          padding: 15px;
+        }
+
+        header {
+          font-size: 18px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <h1>🚀 Space Exploration</h1>
+      <p>Explore missions, history, and the future of space travel</p>
+    </header>
+
+    <main>
+      <div class="card">
+        <h2>Historic Moon Landing</h2>
+        <p>The Apollo 11 mission landed the first humans on the Moon in 1969, marking a significant achievement in space exploration.</p>
+      </div>
+
+      <div class="card">
+        <h2>Future Missions to Mars</h2>
+        <p>NASA and other agencies are planning manned missions to Mars, aiming to establish human presence on the Red Planet by the 2030s.</p>
+      </div>
+    </main>
+
+    <!-- Register Service Worker -->
+    <script>
+      window.addEventListener("load", () => {
+        registerSW();
+      });
+
+      async function registerSW() {
+        if ("serviceWorker" in navigator) {
+          try {
+            await navigator.serviceWorker.register("serviceworker.js");
+            console.log("Service Worker registered successfully.");
+          } catch (e) {
+            console.log("Service Worker registration failed:", e);
+          }
+        }
+      }
+    </script>
+  </body>
+</html>
