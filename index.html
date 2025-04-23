@@ -35,6 +35,23 @@
         color: #fff;
       }
 
+      nav {
+        background: #003366;
+        padding: 10px;
+        text-align: center;
+      }
+
+      nav a {
+        color: #fff;
+        text-decoration: none;
+        margin: 0 15px;
+        font-weight: bold;
+      }
+
+      nav a:hover {
+        text-decoration: underline;
+      }
+
       main {
         padding: 20px;
       }
@@ -75,22 +92,22 @@
       <p>Explore missions, history, and the future of space travel</p>
     </header>
 
-    <main>
-      <div class="card">
-        <h2>Historic Moon Landing</h2>
-        <p>The Apollo 11 mission landed the first humans on the Moon in 1969, marking a significant achievement in space exploration.</p>
-      </div>
+    <nav>
+      <a href="#/" onclick="navigate(event)">Home</a>
+      <a href="#/moon" onclick="navigate(event)">Moon Landing</a>
+      <a href="#/mars" onclick="navigate(event)">Mars Missions</a>
+    </nav>
 
-      <div class="card">
-        <h2>Future Missions to Mars</h2>
-        <p>NASA and other agencies are planning manned missions to Mars, aiming to establish human presence on the Red Planet by the 2030s.</p>
-      </div>
+    <main id="app">
+      <!-- Content will be injected here based on routing -->
     </main>
 
     <!-- Register Service Worker -->
     <script>
       window.addEventListener("load", () => {
         registerSW();
+        renderRoute();
+        window.addEventListener("hashchange", renderRoute);
       });
 
       async function registerSW() {
@@ -102,6 +119,49 @@
             console.log("Service Worker registration failed:", e);
           }
         }
+      }
+
+      function navigate(event) {
+        event.preventDefault();
+        const href = event.target.getAttribute('href');
+        window.location.hash = href;
+      }
+
+      function renderRoute() {
+        const app = document.getElementById("app");
+        const route = window.location.hash;
+
+        let content = '';
+
+        switch (route) {
+          case "#/moon":
+            content = `
+              <div class="card">
+                <h2>Historic Moon Landing</h2>
+                <p>The Apollo 11 mission landed the first humans on the Moon in 1969, marking a significant achievement in space exploration.</p>
+              </div>
+            `;
+            break;
+
+          case "#/mars":
+            content = `
+              <div class="card">
+                <h2>Future Missions to Mars</h2>
+                <p>NASA and other agencies are planning manned missions to Mars, aiming to establish human presence on the Red Planet by the 2030s.</p>
+              </div>
+            `;
+            break;
+
+          default:
+            content = `
+              <div class="card">
+                <h2>Welcome to Space Exploration Info</h2>
+                <p>Choose a topic from above to learn more about space missions and plans.</p>
+              </div>
+            `;
+        }
+
+        app.innerHTML = content;
       }
     </script>
   </body>
